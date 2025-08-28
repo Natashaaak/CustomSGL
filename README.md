@@ -79,90 +79,25 @@ make
 make install
 ```
 
-## Usage Examples
-
-### Basic 2D Drawing
-
-```cpp
-#include "sgl.h"
-
-// Initialize the library
-sglInit();
-
-// Create a drawing context
-int context = sglCreateContext(800, 600);
-sglSetContext(context);
-
-// Set up viewport and projection
-sglMatrixMode(SGL_PROJECTION);
-sglLoadIdentity();
-sglOrtho(-1, 1, -1, 1, -1, 1);
-
-// Set drawing color and draw a circle
-sglColor3f(1.0f, 0.0f, 0.0f);  // Red
-sglCircle(0.0f, 0.0f, 0.0f, 0.5f);
-
-// Get the color buffer for display
-float* buffer = sglGetColorBufferPointer();
-```
-
-### 3D Scene with Ray Tracing
-
-```cpp
-#include "sgl.h"
-
-sglInit();
-int context = sglCreateContext(800, 600);
-sglSetContext(context);
-
-// Set up perspective projection
-sglMatrixMode(SGL_PROJECTION);
-sglLoadIdentity();
-sglFrustum(-1, 1, -1, 1, 1, 100);
-
-// Set up camera
-sglMatrixMode(SGL_MODELVIEW);
-sglLoadIdentity();
-sglTranslate(0, 0, -5);
-
-// Begin scene description
-sglBeginScene();
-
-// Add a sphere with material
-sglMaterial(0.8f, 0.2f, 0.2f,  // Red color
-            0.7f, 0.3f, 20.0f,  // Diffuse, specular, shininess
-            0.0f, 1.0f);        // Transparency, IOR
-sglSphere(0, 0, 0, 1);
-
-// Add a point light
-sglPointLight(5, 5, 5, 1, 1, 1);
-
-sglEndScene();
-
-// Render using ray tracing
-sglRayTraceScene();
-```
-
 ## Test Results
 
 The library has been tested with various scenes demonstrating different rendering capabilities:
 
 ### Generated Images
 
-*Implementation of simple raytracer - shadow rays, secondary rays, backface culling*
-![Test 4b - Basic Scene](results/test4b-ref.png)
+![Test 4b - Basic Scene](results/test4b-ref.png)  
 *Shadows, simple reflections and refractions*
 
-![Test 4c - Complex Scene](results/test4c-ref.png)
+![Test 4c - Complex Scene](results/test4c-ref.png)  
 *Multiple reflections and refractions*
 
-![Test 5b - Advanced Lighting](results/test5b-ref.png)
+![Test 5b - Advanced Lighting](results/test5b-ref.png)  
 *Implemetation of area light sources*
 
-![Test 5c - Transparency and Refraction](results/test5c-ref.png)
+![Test 5c - Transparency and Refraction](results/test5c-ref.png)  
 *Implementation of environment mapping*
 
-![Test 5d - Environment Mapping](results/test5d-ref.png)
+![Test 5d - Environment Mapping](results/test5d-ref.png)  
 *Implementation of environment mapping*
 
 ## API Reference
